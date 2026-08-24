@@ -19,8 +19,10 @@ while True:
         save_tasks(tasks)
     elif choice =="4":
         edit_task(tasks)
+        save_tasks(tasks)
     elif choice == "5":
          mark_task_completed(tasks)
+         save_tasks(tasks)
     elif choice == "6":
           search_task(tasks)
     elif choice =="7":
