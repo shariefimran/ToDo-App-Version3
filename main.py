@@ -23,20 +23,28 @@ def main():
             display_tasks(tasks)
 
         elif choice == "2":
-            add_task(tasks)
-            save_tasks(tasks)
+            result = add_task(tasks)
+
+            if result:
+                save_tasks(tasks)
 
         elif choice == "3":
-            delete_task(tasks)
-            save_tasks(tasks)
+            result = delete_task(tasks)
+
+            if result:
+                save_tasks(tasks)
 
         elif choice == "4":
-            edit_task(tasks)
-            save_tasks(tasks)
+            result = edit_task(tasks)
+
+            if result:
+                save_tasks(tasks)
 
         elif choice == "5":
-            mark_task_completed(tasks)
-            save_tasks(tasks)
+            result = mark_task_completed(tasks)
+
+            if result:
+                save_tasks(tasks)
 
         elif choice == "6":
             search_task(tasks)
@@ -46,6 +54,5 @@ def main():
             break
 
 
-
-if __name__== "__main__":
+if __name__ == "__main__":
     main()
