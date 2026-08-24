@@ -19,6 +19,10 @@ def main():
         show_menu()
         choice = input("Enter your choice: ").strip()
 
+        if choice not in ["1", "2", "3", "4", "5", "6", "7"]:
+            print("Invalid choice")
+            continue
+
         if choice == "1":
             display_tasks(tasks)
 
