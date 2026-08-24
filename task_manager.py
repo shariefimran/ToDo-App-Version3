@@ -18,36 +18,51 @@ def add_task(tasks):
 
 def delete_task(tasks):
     """This will delete task"""
-    # for index,item in enumerate(tasks,start=1):
-    #     print(f"{index}.{item}")
-    if not tasks:    
+
+    if not tasks:
         return
+
     display_tasks(tasks)
-    task_to_delete=int(input("Enter the task number to delete"))
+
+    try:
+        task_to_delete = int(input("Enter the task number to delete"))
+    except ValueError:
+        print("Please enter a valid number")
+        return
+
     if 1 <= task_to_delete <= len(tasks):
-        removed_task= tasks.pop(task_to_delete-1)
-        print(f"{removed_task} deleted  successfully")
+        removed_task = tasks.pop(task_to_delete - 1)
+        print(f"{removed_task} deleted successfully")
     else:
-        print("Invalid task number ")
+        print("Invalid task number")
 
 
 def edit_task(tasks):
-    """this will edit task"""
+    """This will edit a task."""
+
     if not tasks:
-        print("there are no tasks to edit")
+        print("There are no tasks to edit.")
         return
+
     display_tasks(tasks)
-    task_to_edit=int(input("enter the task number to edit "))
+
+    try:
+        task_to_edit = int(input("Enter the task number to edit: "))
+    except ValueError:
+        print("Please enter a valid number to edit.")
+        return
+
     if 1 <= task_to_edit <= len(tasks):
-        new_task=input("enetr the new task").strip().lower()
+        new_task = input("Enter the new task: ").strip().lower()
+
         if new_task not in tasks:
-            old_task=tasks[task_to_edit-1]
-            tasks[task_to_edit-1]=new_task
-            print(f"{old_task}updated with {new_task}")
+            old_task = tasks[task_to_edit - 1]
+            tasks[task_to_edit - 1] = new_task
+            print(f"{old_task} updated with {new_task}")
         else:
-            print("This task already exists.") 
+            print("This task already exists.")
     else:
-        print("invalid task ")
+        print("Invalid task number.")
 
 def mark_task_completed(tasks):
     """Mark task completed """
