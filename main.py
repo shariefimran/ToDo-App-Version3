@@ -15,8 +15,11 @@ from storage import load_tasks, save_tasks
 def main():
     tasks = load_tasks()
 
+    print(tasks)
+
     while True:
         show_menu()
+
         choice = input("Enter your choice: ").strip()
 
         if choice not in ["1", "2", "3", "4", "5", "6", "7"]:

@@ -4,23 +4,42 @@ def display_tasks(tasks):
     if not tasks:
         print("There are no tasks to display")
     else:
-        for index, item in enumerate(tasks, start=1):
-            print(f"{index}. {item}")
+        for index, task  in enumerate(tasks, start=1):
+            if task["completed"]:
+                print(f"{index}.✔️{task['name']}")
+            else:
+
+                print(f"{index}. {task['name']}")
+
+
+# def add_task(tasks):
+#     """This will add a task."""
+
+#     task_to_add = input("Enter the task name to add: ").strip().lower()
+
+#     if task_to_add not in tasks:
+#         tasks.append(task_to_add)
+#         print(f"{task_to_add} added successfully")
+#         return True
+#     else:
+#         print("Entered task already present in the list.")
+#         return False
 
 
 def add_task(tasks):
-    """This will add a task."""
-
-    task_to_add = input("Enter the task name to add: ").strip().lower()
-
-    if task_to_add not in tasks:
-        tasks.append(task_to_add)
-        print(f"{task_to_add} added successfully")
-        return True
-    else:
-        print("Entered task already present in the list.")
-        return False
-
+    task_to_add=input("Enter the task name to add : ").strip().lower()
+    for task in tasks:
+        if task["name"].lower()==task_to_add:
+            print("Task already exists")
+            return False
+    
+    new_task={
+                "name":task_to_add,
+                "completed":False
+            }
+    tasks.append(new_task)
+    print(f"{task_to_add} added successfully")
+    return True
 
 def delete_task(tasks):
     """This will delete a task."""
