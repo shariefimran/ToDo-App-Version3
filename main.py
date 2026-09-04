@@ -15,7 +15,7 @@ from storage import load_tasks, save_tasks
 def main():
     tasks = load_tasks()
 
-    print(tasks)
+    # print(tasks)
 
     while True:
         show_menu()
