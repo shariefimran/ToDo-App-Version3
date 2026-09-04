@@ -58,7 +58,7 @@ def delete_task(tasks):
 
     if 1 <= task_to_delete <= len(tasks):
         removed_task = tasks.pop(task_to_delete - 1)
-        print(f"{removed_task} deleted successfully")
+        print(f"{removed_task['name']} deleted successfully")
         return True
     else:
         print("Invalid task number.")
@@ -76,22 +76,27 @@ def edit_task(tasks):
 
     try:
         task_to_edit = int(input("Enter the task number to edit: "))
+
     except ValueError:
         print("Please enter a valid number to edit.")
         return False
 
     if 1 <= task_to_edit <= len(tasks):
+
         new_task = input("Enter the new task: ").strip().lower()
 
-        if new_task not in tasks:
-            old_task = tasks[task_to_edit - 1]
-            tasks[task_to_edit - 1] = new_task
+        for task in tasks:
+            if task["name"] == new_task:
+                print("This task already exists.")
+                return False
 
-            print(f"{old_task} updated with {new_task}")
-            return True
-        else:
-            print("This task already exists.")
-            return False
+        old_task = tasks[task_to_edit - 1]["name"]
+
+        tasks[task_to_edit - 1]["name"] = new_task
+
+        print(f"{old_task} updated with {new_task}")
+
+        return True
 
     else:
         print("Invalid task number.")
@@ -115,16 +120,15 @@ def mark_task_completed(tasks):
 
     if 1 <= completed_task <= len(tasks):
 
-        if tasks[completed_task - 1].startswith("✔️"):
+        if tasks[completed_task - 1]['completed']:
             print("Task is already completed.")
             return False
         else:
-            tasks[completed_task - 1] = (
-                "✔️ " + tasks[completed_task - 1]
-            )
+            tasks[completed_task - 1]['completed']= True 
+             
 
             print(
-                f"{tasks[completed_task - 1]} marked as completed."
+                f"{tasks[completed_task - 1]['name']} marked as completed."
             )
             return True
 
@@ -148,8 +152,8 @@ def search_task(tasks):
 
     for index, item in enumerate(tasks, start=1):
 
-        if find_task in item.lower():
-            print(f"{index}. {item}")
+        if find_task in item['name'].lower():
+            print(f"{index}. {item['name']}")
             found = True
 
     if not found:
