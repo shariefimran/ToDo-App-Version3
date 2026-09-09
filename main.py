@@ -7,7 +7,9 @@ from task_manager import (
     edit_task,
     mark_task_completed,
     search_task,
-    task_summary
+    task_summary,
+    filter_tasks,
+    priority_options
 )
 
 from storage import load_tasks, save_tasks
@@ -23,7 +25,7 @@ def main():
 
         choice = input("Enter your choice: ").strip()
 
-        if choice not in ["1", "2", "3", "4", "5", "6", "7","8"]:
+        if choice not in ["1", "2", "3", "4", "5", "6", "7","8","9"]:
             print("Invalid choice")
             continue
 
@@ -58,8 +60,17 @@ def main():
             search_task(tasks)
         elif choice =="7":
             task_summary(tasks)
+        elif choice =="8":
+            priority_choice = input("Enter priority choice: ").strip()
+            if priority_choice in priority_options:
+                priority= priority_options[priority_choice]
+                filter_tasks(tasks,priority)
+            else:
+                print("please enter a valid priority choice")
 
-        elif choice == "8":
+            
+
+        elif choice == "9":
             print("Good Bye")
             break
 

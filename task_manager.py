@@ -1,3 +1,11 @@
+priority_options = {
+        "1" : "Low",
+        "2" : "Medium",
+        "3" : "High"
+    }
+
+
+
 def display_tasks(tasks):
     """Display all tasks."""
 
@@ -7,7 +15,7 @@ def display_tasks(tasks):
         for index, task in enumerate(tasks, start=1):
             priority = task.get("priority","Medium")
             if task["completed"]:
-                print(f"{index}. ✔️ {task['name']}priority : {priority}")
+                print(f"{index}. ✔️ {task['name']} | priority : {priority}")
             else:
                 print(f"{index}. {task['name']}priority : {priority}")
 
@@ -66,6 +74,26 @@ def task_summary(tasks):
     print(f"low priority tasks are : {low_priority_count}")
     print(f"Medium priority tasks are : {Medium_priority_count}")
 
+def filter_tasks(tasks, priority):
+    """Filter tasks by priority."""
+
+    filtered_tasks = [
+        task
+        for task in tasks
+        if task.get("priority", "Medium") == priority
+    ]
+
+    if not filtered_tasks:
+        print("There are no tasks with this priority.")
+        return False
+
+    for index, task in enumerate(filtered_tasks, start=1):
+        print(
+            f"{index}. {task['name']} | "
+            f"Priority: {task.get('priority', 'Medium')}"
+        )
+
+    return True
 
 def add_task(tasks):
     """Add a new task."""
@@ -78,11 +106,11 @@ def add_task(tasks):
         if task["name"].lower() == task_to_add:
             print("Task already exists")
             return False
-    priority_options = {
-        "1" : "Low",
-        "2" : "Medium",
-        "3" : "High"
-    }
+    # priority_options = {
+    #     "1" : "Low",
+    #     "2" : "Medium",
+    #     "3" : "High"
+    # }
     priority_choice=input("enter the priority").strip()
 
     if priority_choice in priority_options:
