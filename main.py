@@ -7,6 +7,7 @@ from task_manager import (
     edit_task,
     mark_task_completed,
     search_task,
+    task_summary
 )
 
 from storage import load_tasks, save_tasks
@@ -15,14 +16,14 @@ from storage import load_tasks, save_tasks
 def main():
     tasks = load_tasks()
 
-    # print(tasks)
+    
 
     while True:
         show_menu()
 
         choice = input("Enter your choice: ").strip()
 
-        if choice not in ["1", "2", "3", "4", "5", "6", "7"]:
+        if choice not in ["1", "2", "3", "4", "5", "6", "7","8"]:
             print("Invalid choice")
             continue
 
@@ -55,8 +56,10 @@ def main():
 
         elif choice == "6":
             search_task(tasks)
+        elif choice =="7":
+            task_summary(tasks)
 
-        elif choice == "7":
+        elif choice == "8":
             print("Good Bye")
             break
 

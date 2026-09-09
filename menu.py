@@ -8,4 +8,5 @@ def show_menu():
     print("4. Edit Task")
     print("5. Mark Task as Completed")
     print("6. Search Task")
-    print("7. Exit")
+    print("7. Task Summary")
+    print("8. Exit")

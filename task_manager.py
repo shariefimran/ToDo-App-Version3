@@ -12,6 +12,32 @@ def display_tasks(tasks):
                 print(f"{index}. {task['name']}")
 
 
+def task_summary(tasks):
+    """This function will display the task summary."""
+
+    total_tasks = len(tasks)
+
+    completed_tasks = [
+        task
+        for task in tasks
+        if task["completed"]
+    ]
+
+    completed_count = len(completed_tasks)
+
+    pending_tasks =[
+        task
+        for task in tasks
+        if not task["completed"]
+    ]
+
+    pending_count=len(pending_tasks)
+
+    print("========== Task Summary =========")
+    print(f"Total Tasks : {total_tasks}")
+    print(f"Completed Tasks : {completed_count}")
+    print(f"Pending Tasks : {pending_count}")
+
 # def add_task(tasks):
 #     """This will add a task."""
 
