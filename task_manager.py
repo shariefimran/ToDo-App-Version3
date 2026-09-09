@@ -5,10 +5,11 @@ def display_tasks(tasks):
         print("There are no tasks to display")
     else:
         for index, task in enumerate(tasks, start=1):
+            priority = task.get("priority","Medium")
             if task["completed"]:
-                print(f"{index}. ✔️ {task['name']}")
+                print(f"{index}. ✔️ {task['name']}priority : {priority}")
             else:
-                print(f"{index}. {task['name']}")
+                print(f"{index}. {task['name']}priority : {priority}")
 
 
 def task_summary(tasks):
@@ -32,10 +33,38 @@ def task_summary(tasks):
 
     pending_count = len(pending_tasks)
 
+    high_priority_tasks = [
+        task
+        for task in tasks
+        if task.get("priority","Medium") == "High"
+    ]
+
+    high_priority_count=len(high_priority_tasks)
+
+    low_priority_tasks = [
+           task
+           for task in tasks
+           if task.get("priority","Medium") == "Low"
+       ]
+   
+    low_priority_count=len(low_priority_tasks)
+
+    Medium_priority_tasks = [
+               task
+               for task in tasks
+               if task.get("priority","Medium") == "Medium"
+           ]
+       
+    Medium_priority_count=len(Medium_priority_tasks)
+   
+
     print("========== Task Summary =========")
     print(f"Total Tasks : {total_tasks}")
     print(f"Completed Tasks : {completed_count}")
     print(f"Pending Tasks : {pending_count}")
+    print(f"High priority tasks are : {high_priority_count}")
+    print(f"low priority tasks are : {low_priority_count}")
+    print(f"Medium priority tasks are : {Medium_priority_count}")
 
 
 def add_task(tasks):
@@ -49,10 +78,26 @@ def add_task(tasks):
         if task["name"].lower() == task_to_add:
             print("Task already exists")
             return False
+    priority_options = {
+        "1" : "Low",
+        "2" : "Medium",
+        "3" : "High"
+    }
+    priority_choice=input("enter the priority").strip()
+
+    if priority_choice in priority_options:
+        priority=priority_options[priority_choice]
+    else:
+        print("Please enter the valid priority number")
+        return False
+  
+     
+    
 
     new_task = {
         "name": task_to_add,
-        "completed": False
+        "completed": False,
+        "priority":priority
     }
 
     tasks.append(new_task)
