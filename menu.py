@@ -10,4 +10,5 @@ def show_menu():
     print("6. Search Task")
     print("7. Task Summary")
     print("8. Filter Tasks")
-    print("9. Exit")
+    print("9.Filter Category")
+    print("10. Exit")

@@ -71,6 +71,39 @@ def task_summary(tasks):
            ]
        
     Medium_priority_count=len(Medium_priority_tasks)
+
+
+    work_tasks = [
+                   task
+                   for task in tasks
+                   if task.get("category","Other") == "Work"
+               ]
+           
+    work_count=len(work_tasks)
+
+    learning_tasks = [
+                   task
+                   for task in tasks
+                   if task.get("category","Other") == "Learning"
+               ]
+           
+    learning_count=len(learning_tasks)
+
+    personal_tasks = [
+                       task
+                       for task in tasks
+                       if task.get("category","Other") == "Personal"
+                   ]           
+    personal_count=len(personal_tasks)
+
+    other_tasks = [
+                       task
+                       for task in tasks
+                       if task.get("category","Other") == "Other"
+                   ]
+               
+    other_count=len(other_tasks)
+    
    
 
     print("========== Task Summary =========")
@@ -80,6 +113,10 @@ def task_summary(tasks):
     print(f"High priority tasks are : {high_priority_count}")
     print(f"low priority tasks are : {low_priority_count}")
     print(f"Medium priority tasks are : {Medium_priority_count}")
+    print(f"Work tasks  : {work_count}")
+    print(f"Personal tasks  : {personal_count}")
+    print(f"Other tasks  : {other_count}")
+    print(f"Learning tasks  : {learning_count}")
 
 def filter_tasks(tasks, priority):
     """Filter tasks by priority."""
@@ -99,8 +136,31 @@ def filter_tasks(tasks, priority):
             f"{index}. {task['name']} | "
             f"Priority: {task.get('priority', 'Medium')}"
         )
+    return True
+
+def filter_task_by_category(tasks, category):
+    """Filter tasks by category."""
+
+    task_by_category = [
+        task
+        for task in tasks
+        if task.get("category", "Other") == category
+    ]
+
+    if not task_by_category:
+        print("There are no tasks with this category.")
+        return False
+
+    for index, task in enumerate(task_by_category, start=1):
+        print(
+            f"{index}. {task['name']} | "
+            f"Category: {task.get('category', 'Other')}"
+        )
 
     return True
+
+
+
 
 def add_task(tasks):
     """Add a new task."""
