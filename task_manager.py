@@ -3,7 +3,13 @@ priority_options = {
         "2" : "Medium",
         "3" : "High"
     }
-
+category_options={
+     "1":"Work",
+        "2":"Learning",
+        "3":"Personal",
+        "4":"Other"
+}
+   
 
 
 def display_tasks(tasks):
@@ -14,10 +20,11 @@ def display_tasks(tasks):
     else:
         for index, task in enumerate(tasks, start=1):
             priority = task.get("priority","Medium")
+            category = task.get("category","Other")
             if task["completed"]:
-                print(f"{index}. ✔️ {task['name']} | priority : {priority}")
+                print(f"{index}. ✔️ {task['name']} | priority : {priority} | category : {category}")
             else:
-                print(f"{index}. {task['name']}priority : {priority}")
+                print(f"{index}. {task['name']} | priority : {priority} | category : {category}")
 
 
 def task_summary(tasks):
@@ -120,12 +127,19 @@ def add_task(tasks):
         return False
   
      
-    
+    category_choice = input("enter the category").strip()
+
+    if category_choice in category_options:
+        category=category_options[category_choice]
+    else:
+        print("Please enter a valid category number")
+        return False
 
     new_task = {
         "name": task_to_add,
         "completed": False,
-        "priority":priority
+        "priority":priority,
+        "category": category
     }
 
     tasks.append(new_task)

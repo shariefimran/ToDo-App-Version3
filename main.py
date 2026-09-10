@@ -9,7 +9,8 @@ from task_manager import (
     search_task,
     task_summary,
     filter_tasks,
-    priority_options
+    priority_options,
+    category_options
 )
 
 from storage import load_tasks, save_tasks
