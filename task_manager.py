@@ -10,7 +10,7 @@ category_options={
         "4":"Other"
 }
    
-
+from datetime import datetime,date
 
 def display_tasks(tasks):
     """Display all tasks."""
@@ -21,10 +21,12 @@ def display_tasks(tasks):
         for index, task in enumerate(tasks, start=1):
             priority = task.get("priority","Medium")
             category = task.get("category","Other")
+            due_date= task.get("due_date","Not Set")
             if task["completed"]:
-                print(f"{index}. ✔️ {task['name']} | priority : {priority} | category : {category}")
+                print(f"{index}. ✔️ {task['name']} | priority : {priority} | category : {category} | due_date : {due_date}")
             else:
-                print(f"{index}. {task['name']} | priority : {priority} | category : {category}")
+                print(f"{index}. {task['name']} | priority : {priority} | category : {category} | due_date :{due_date}")
+        
 
 
 def task_summary(tasks):
@@ -194,18 +196,52 @@ def add_task(tasks):
     else:
         print("Please enter a valid category number")
         return False
+    due_date = input("Enter the due date (YYYY-MM-DD): ").strip()
+    
+    try:
+            due_date=datetime.strptime(due_date,"%Y-%m-%d").date()
+    except ValueError:
+            print("Please enter a valid date")
+            return False
+    if due_date < date.today():
+            print("Due date cannot be in the past")
+            return False
 
     new_task = {
         "name": task_to_add,
         "completed": False,
         "priority":priority,
-        "category": category
+        "category": category,
+        "due_date": due_date.strftime("%Y-%m-%d")
     }
 
     tasks.append(new_task)
 
     print(f"{task_to_add} added successfully")
     return True
+
+def show_overdue_tasks(tasks):
+    """Display overdue tasks."""
+
+    for task in tasks:
+        due_date = task.get("due_date")
+
+        overdue_found = False
+        
+
+        if due_date:
+            due_date = datetime.strptime(
+                due_date,
+                "%Y-%m-%d"
+            ).date()
+
+            if due_date < date.today():
+                print(task["name"])
+                overdue_found=True
+    if not overdue_found:
+            print("No over due found ")
+            
+    
 
 
 def delete_task(tasks):

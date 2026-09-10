@@ -11,7 +11,10 @@ from task_manager import (
     filter_tasks,
     priority_options,
     category_options,
-    filter_task_by_category
+    filter_task_by_category,
+    show_overdue_tasks
+
+    
 )
 
 from storage import load_tasks, save_tasks
@@ -25,9 +28,11 @@ def main():
     while True:
         show_menu()
 
+       
+
         choice = input("Enter your choice: ").strip()
 
-        if choice not in ["1", "2", "3", "4", "5", "6", "7","8","9","10"]:
+        if choice not in ["1", "2", "3", "4", "5", "6", "7","8","9","10","11"]:
             print("Invalid choice")
             continue
 
@@ -77,12 +82,17 @@ def main():
                         filter_task_by_category(tasks,category)
                     else:
                         print("please enter a valid priority choice")
+        elif choice =="10":
+            show_overdue_tasks(tasks)
+
+                            
+                           
         
         
 
             
 
-        elif choice == "10":
+        elif choice == "11":
             print("Good Bye")
             break
 
