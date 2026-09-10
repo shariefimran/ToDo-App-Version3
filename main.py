@@ -12,7 +12,9 @@ from task_manager import (
     priority_options,
     category_options,
     filter_task_by_category,
-    show_overdue_tasks
+    show_overdue_tasks,
+    show_due_tasks,
+    show_upcoming_due_tasks
 
     
 )
@@ -83,7 +85,26 @@ def main():
                     else:
                         print("please enter a valid priority choice")
         elif choice =="10":
-            show_overdue_tasks(tasks)
+            while True:
+                print("\n====== Due Date=====")
+                print("1.Overdue Tasks")
+                print("2.Due Today")
+                print("3. Upcoming Tasks")
+                print("4. Back to Main Menu")
+                due_choice=input("Enter your choice").strip()
+
+                if due_choice == "1":
+                    show_overdue_tasks(tasks)
+                elif due_choice == "2":
+                    show_due_tasks(tasks)
+                elif due_choice == "3":
+                    show_upcoming_due_tasks(tasks)
+                elif due_choice == "4":
+                    break
+                else:
+                    print("Invalid choice")
+
+           
 
                             
                            

@@ -241,6 +241,42 @@ def show_overdue_tasks(tasks):
     if not overdue_found:
             print("No over due found ")
             
+def show_due_tasks(tasks):
+    today_due_date=False
+
+    for task in tasks:
+        due_date=task.get("due_date")
+        
+
+        if due_date:
+            due_date=datetime.strptime(
+                due_date,"%Y-%m-%d"
+            ).date()
+
+            if due_date == date.today():
+                print(task["name"])
+                today_due_date=True
+    if not today_due_date:
+        print("due date is not today")
+
+def show_upcoming_due_tasks(tasks):
+    upcoming_due_date=False
+
+    for task in tasks:
+        due_date=task.get("due_date")
+        
+
+        if due_date:
+            due_date=datetime.strptime(
+                due_date,"%Y-%m-%d"
+            ).date()
+
+            if due_date > date.today():
+                print(task["name"])
+                upcoming_due_date=True
+    if not upcoming_due_date:
+        print("due date is not today")
+    
     
 
 
