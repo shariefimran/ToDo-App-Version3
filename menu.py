@@ -12,4 +12,5 @@ def show_menu():
     print("8. Filter Tasks")
     print("9.Filter Category")
     print("10.Due Date")
-    print("11. Exit")
+    print("11.Sort Tasks")
+    print("12. Exit")

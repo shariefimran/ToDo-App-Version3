@@ -14,7 +14,10 @@ from task_manager import (
     filter_task_by_category,
     show_overdue_tasks,
     show_due_tasks,
-    show_upcoming_due_tasks
+    show_upcoming_due_tasks,
+    sort_tasks_by_priority,
+    sort_tasks_by_due_date,
+    sort_task_alphabetically
 
     
 )
@@ -34,7 +37,7 @@ def main():
 
         choice = input("Enter your choice: ").strip()
 
-        if choice not in ["1", "2", "3", "4", "5", "6", "7","8","9","10","11"]:
+        if choice not in ["1", "2", "3", "4", "5", "6", "7","8","9","10","11","12"]:
             print("Invalid choice")
             continue
 
@@ -103,9 +106,27 @@ def main():
                     break
                 else:
                     print("Invalid choice")
+        elif choice =="11":
+            while True:
+                print("\n ===== Sort Tasks=====")
+                print("1. Sort by priority")
+                print("2. Sort by Due Date")
+                print("3. Sort by Alphabetical order")
+                print("4. Back to main Menu")
+                sort_choice=input("enter your choice").strip()
+                if sort_choice == "1":
+                    sort_tasks_by_priority(tasks)
+                elif sort_choice == "2":
+                    sort_tasks_by_due_date(tasks)
+                elif sort_choice == "3":
+                    sort_task_alphabetically(tasks)
+                elif sort_choice == "4":
+                    break
+                else:
+                    print("Invalid choice ")
+            
 
            
-
                             
                            
         
@@ -113,7 +134,7 @@ def main():
 
             
 
-        elif choice == "11":
+        elif choice == "12":
             print("Good Bye")
             break
 

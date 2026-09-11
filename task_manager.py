@@ -9,7 +9,13 @@ category_options={
         "3":"Personal",
         "4":"Other"
 }
-   
+
+priority_order= {
+    "High":1,
+    "Medium":2,
+    "Low":3
+}
+
 from datetime import datetime,date
 
 def display_tasks(tasks):
@@ -278,8 +284,46 @@ def show_upcoming_due_tasks(tasks):
         print("due date is not today")
     
     
+def sort_tasks_by_priority(tasks):
+    """ sort tasks based on the priority"""
+    sorted_tasks=sorted(
+        tasks,
+        key=lambda task: priority_order[task.get("priority","Medium")]
+
+    )
+
+    for task in sorted_tasks:
+        print(f"{task['name']} | " f" priority : {task.get('priority','Medium')}")
 
 
+def due_date_key(task):
+    due_date=task.get("due_date")
+    if due_date:
+        return datetime.strptime(
+            due_date,"%Y-%m-%d"
+        ).date()
+    return date.max
+
+def sort_tasks_by_due_date(tasks):
+    """this will sort tasks by due date"""
+    sorted_tasks=sorted(
+        tasks,
+        key=due_date_key
+    )
+
+    for task in sorted_tasks:
+        print(f"{task['name']} | "f" due date : {task.get('due_date','Not Set')}")
+
+def sort_task_alphabetically(tasks):
+    """This will sort the task in alphabetical order."""
+
+    sorted_task = sorted(
+        tasks,
+        key=lambda task: task["name"].lower()
+    )
+
+    for task in sorted_task:
+        print(f"{task['name']}")
 def delete_task(tasks):
     """Delete a task."""
 
