@@ -59,58 +59,84 @@ def task_summary(tasks):
     high_priority_tasks = [
         task
         for task in tasks
-        if task.get("priority","Medium") == "High"
+        if task.get("priority", "Medium") == "High"
     ]
 
-    high_priority_count=len(high_priority_tasks)
+    high_priority_count = len(high_priority_tasks)
 
     low_priority_tasks = [
-           task
-           for task in tasks
-           if task.get("priority","Medium") == "Low"
-       ]
-   
-    low_priority_count=len(low_priority_tasks)
+        task
+        for task in tasks
+        if task.get("priority", "Medium") == "Low"
+    ]
 
-    Medium_priority_tasks = [
-               task
-               for task in tasks
-               if task.get("priority","Medium") == "Medium"
-           ]
-       
-    Medium_priority_count=len(Medium_priority_tasks)
+    low_priority_count = len(low_priority_tasks)
 
+    medium_priority_tasks = [
+        task
+        for task in tasks
+        if task.get("priority", "Medium") == "Medium"
+    ]
+
+    medium_priority_count = len(medium_priority_tasks)
 
     work_tasks = [
-                   task
-                   for task in tasks
-                   if task.get("category","Other") == "Work"
-               ]
-           
-    work_count=len(work_tasks)
+        task
+        for task in tasks
+        if task.get("category", "Other") == "Work"
+    ]
+
+    work_count = len(work_tasks)
 
     learning_tasks = [
-                   task
-                   for task in tasks
-                   if task.get("category","Other") == "Learning"
-               ]
-           
-    learning_count=len(learning_tasks)
+        task
+        for task in tasks
+        if task.get("category", "Other") == "Learning"
+    ]
+
+    learning_count = len(learning_tasks)
 
     personal_tasks = [
-                       task
-                       for task in tasks
-                       if task.get("category","Other") == "Personal"
-                   ]           
-    personal_count=len(personal_tasks)
+        task
+        for task in tasks
+        if task.get("category", "Other") == "Personal"
+    ]
+
+    personal_count = len(personal_tasks)
 
     other_tasks = [
-                       task
-                       for task in tasks
-                       if task.get("category","Other") == "Other"
-                   ]
-               
-    other_count=len(other_tasks)
+        task
+        for task in tasks
+        if task.get("category", "Other") == "Other"
+    ]
+
+    other_count = len(other_tasks)
+
+    no_due_date = 0
+    overdue = 0
+    due_today = 0
+    upcoming = 0
+
+    for task in tasks:
+        due_date = task.get("due_date")
+
+        if not due_date:
+            no_due_date += 1
+            continue
+
+        due_date = datetime.strptime(
+            due_date,
+            "%Y-%m-%d"
+        ).date()
+
+        if due_date < date.today():
+            overdue += 1
+
+        if due_date == date.today():
+            due_today += 1
+
+        if due_date > date.today():
+            upcoming += 1
     
    
 
@@ -120,11 +146,15 @@ def task_summary(tasks):
     print(f"Pending Tasks : {pending_count}")
     print(f"High priority tasks are : {high_priority_count}")
     print(f"low priority tasks are : {low_priority_count}")
-    print(f"Medium priority tasks are : {Medium_priority_count}")
+    print(f"Medium priority tasks are : {medium_priority_count}")
     print(f"Work tasks  : {work_count}")
     print(f"Personal tasks  : {personal_count}")
     print(f"Other tasks  : {other_count}")
     print(f"Learning tasks  : {learning_count}")
+    print(f"overdue : {overdue}")
+    print(f"Due Today : {due_today}")
+    print(f"Upcoming : {upcoming}")
+    print(f"No Due Date : {no_due_date}")
 
 def filter_tasks(tasks, priority):
     """Filter tasks by priority."""
