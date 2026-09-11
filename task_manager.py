@@ -218,6 +218,14 @@ def add_task(tasks):
         "Enter the task name to add: "
     ).strip().lower()
 
+    if not task_to_add:
+        print("task cant be empty")
+        return False
+
+    if len(task_to_add) > 100 :
+        print("Task name is too long ")
+        return False
+
     for task in tasks:
         if task["name"].lower() == task_to_add:
             print("Task already exists")
@@ -227,6 +235,11 @@ def add_task(tasks):
     #     "2" : "Medium",
     #     "3" : "High"
     # }
+
+    print("Priority Options:")
+    print("1. Low")
+    print("2. Medium")
+    print("3. High")
     priority_choice=input("enter the priority").strip()
 
     if priority_choice in priority_options:
