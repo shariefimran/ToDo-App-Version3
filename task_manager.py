@@ -141,16 +141,27 @@ def task_summary(tasks):
    
 
     print("========== Task Summary =========")
+    print("\n Tasks")
+    print("--------------------------------")
     print(f"Total Tasks : {total_tasks}")
     print(f"Completed Tasks : {completed_count}")
     print(f"Pending Tasks : {pending_count}")
+
+    print("\n Priority")
+    print("----------------------------------------------")
     print(f"High priority tasks are : {high_priority_count}")
     print(f"low priority tasks are : {low_priority_count}")
     print(f"Medium priority tasks are : {medium_priority_count}")
+
+    print("\n Category")
+    print("------------------------------------")
     print(f"Work tasks  : {work_count}")
     print(f"Personal tasks  : {personal_count}")
     print(f"Other tasks  : {other_count}")
     print(f"Learning tasks  : {learning_count}")
+
+    print("\n Due Dates")
+    print("---------------------------------------------------")
     print(f"overdue : {overdue}")
     print(f"Due Today : {due_today}")
     print(f"Upcoming : {upcoming}")
@@ -258,11 +269,12 @@ def add_task(tasks):
 
 def show_overdue_tasks(tasks):
     """Display overdue tasks."""
+    overdue_found = False
 
     for task in tasks:
         due_date = task.get("due_date")
 
-        overdue_found = False
+        
         
 
         if due_date:
