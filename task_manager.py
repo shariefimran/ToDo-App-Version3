@@ -27,7 +27,7 @@ def display_tasks(tasks):
         for index, task in enumerate(tasks, start=1):
             priority = task.get("priority","Medium")
             category = task.get("category","Other")
-            due_date= task.get("due_date","Not Set")
+            due_date= task.get("due_date")or "Not Set"
             if task["completed"]:
                 print(f"{index}. ✔️ {task['name']} | priority : {priority} | category : {category} | due_date : {due_date}")
             else:
