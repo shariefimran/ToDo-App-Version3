@@ -248,7 +248,11 @@ def add_task(tasks):
         print("Please enter the valid priority number")
         return False
   
-     
+    print("Category Options")
+    print("1. Work")
+    print("2. Learning")
+    print("3. Personal")
+    print("4.Other")
     category_choice = input("enter the category").strip()
 
     if category_choice in category_options:
