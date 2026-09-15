@@ -17,6 +17,13 @@ priority_order= {
 }
 
 from datetime import datetime,date
+from menu import print_header
+# def print_header(title):
+#     print("="* 30)
+#     print(title.center(30))
+#     print("="* 30)
+#     print_header("TODO MANAGER")
+
 
 def display_tasks(tasks):
     """Display all tasks."""
@@ -24,14 +31,26 @@ def display_tasks(tasks):
     if not tasks:
         print("There are no tasks to display")
     else:
+        print_header("TASKS")
         for index, task in enumerate(tasks, start=1):
             priority = task.get("priority","Medium")
             category = task.get("category","Other")
             due_date= task.get("due_date")or "Not Set"
             if task["completed"]:
-                print(f"{index}. ✔️ {task['name']} | priority : {priority} | category : {category} | due_date : {due_date}")
+                print(f"{index}. ✔️ {task['name']}")
+                print(f" Priority : {priority}") 
+                print(f" Category : {category}")
+                print(f" Due_Date : {due_date}")
+                print()
+
+                      
             else:
-                print(f"{index}. {task['name']} | priority : {priority} | category : {category} | due_date :{due_date}")
+                print(f"{index}. {task['name']} ")
+                print(f" Priority : {priority}")
+                print(f" Category : {category}")
+                print(f" Due_Date : {due_date}")
+
+                
         
 
 
