@@ -24,6 +24,9 @@ from menu import print_header
 #     print("="* 30)
 #     print_header("TODO MANAGER")
 
+def print_separator():
+    print("-" * 40)
+
 
 def display_tasks(tasks):
     """Display all tasks."""
@@ -36,20 +39,22 @@ def display_tasks(tasks):
             priority = task.get("priority","Medium")
             category = task.get("category","Other")
             due_date= task.get("due_date")or "Not Set"
-            if task["completed"]:
-                print(f"{index}. ✔️ {task['name']}")
-                print(f" Priority : {priority}") 
-                print(f" Category : {category}")
-                print(f" Due_Date : {due_date}")
-                print()
 
-                      
-            else:
-                print(f"{index}. {task['name']} ")
-                print(f" Priority : {priority}")
-                print(f" Category : {category}")
-                print(f" Due_Date : {due_date}")
+            status = "✔️ Completed" if task['completed'] else "❌ Pending"
+            print(f"{index}. {task['name']}")
+            print(f" {'Status' :<10} : {status}")
+            
+            print(f" {'Priority' :<10} : {priority}") 
+            print(f" {'Category' :<10} : {category}")
+            print(f" {'Due Date' :<10} : {due_date}")
+            print()
 
+            if index < len(tasks):
+
+                print_separator()         
+            
+            
+            
                 
         
 
