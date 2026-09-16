@@ -16,6 +16,8 @@ menu_items=[
         "Filter Category",
         "Due Date",
         "Sort Tasks",
+        "Export Tasks",
+        "Import Task",
         "Exit"
     ]
 def show_menu():

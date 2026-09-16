@@ -57,3 +57,39 @@ def load_tasks():
         save_tasks(converted_tasks)
 
     return converted_tasks
+
+
+def export_tasks(tasks):
+    """Export tasks to a separate JSON file."""
+
+    if not tasks:
+        print("There are no tasks to export.")
+        return False
+
+    with open("tasks_export.json", "w") as file:
+        json.dump(tasks, file, indent=4)
+
+    print("Tasks exported successfully.")
+    return True
+
+def import_tasks():
+    """Import tasks from the export file."""
+
+    try:
+        with open("tasks_export.json", "r") as file:
+            tasks = json.load(file)
+
+    except FileNotFoundError:
+        print("Export file not found.")
+        return False
+
+    except json.JSONDecodeError:
+        print("Export file contains invalid JSON.")
+        return False
+
+    print("Tasks imported successfully.")
+    return tasks
+
+
+
+    

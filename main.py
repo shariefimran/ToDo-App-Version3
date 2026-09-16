@@ -1,4 +1,4 @@
-from menu import show_menu,menu_items
+from menu import show_menu, menu_items
 
 from task_manager import (
     display_tasks,
@@ -19,37 +19,32 @@ from task_manager import (
     sort_tasks_by_due_date,
     sort_task_alphabetically,
     display_tasks_paginated
-
-    
 )
 
-from storage import load_tasks, save_tasks
+from storage import (
+    load_tasks,
+    save_tasks,
+    export_tasks,
+    import_tasks
+)
 
 
 def main():
     tasks = load_tasks()
 
-    
-
     while True:
         show_menu()
-        
 
         try:
-        
-
             choice = int(input("Enter your choice: ").strip())
 
             if not 1 <= choice <= len(menu_items):
-                print("invalid Choice")
+                print("Invalid Choice")
                 continue
-        except ValueError :
-            print("please enter a valid choice")
-            continue
 
-        # if choice not in ["1", "2", "3", "4", "5", "6", "7","8","9","10","11","12"]:
-        #     print("Invalid choice")
-        #     continue
+        except ValueError:
+            print("Please enter a valid choice")
+            continue
 
         if choice == 1:
             display_tasks_paginated(tasks)
@@ -80,74 +75,104 @@ def main():
 
         elif choice == 6:
             search_task(tasks)
-        elif choice ==7:
-            task_summary(tasks)
-        elif choice ==8:
-            priority_choice = input("Enter priority choice: ").strip()
-            if priority_choice in priority_options:
-                priority= priority_options[priority_choice]
-                filter_tasks(tasks,priority)
-            else:
-                print("please enter a valid priority choice")
 
-        elif choice ==9:
-                    category_choice = input("Enter category choice: ").strip()
-                    if category_choice in category_options:
-                        category= category_options[category_choice]
-                        filter_task_by_category(tasks,category)
-                    else:
-                        print("please enter a valid priority choice")
-        elif choice ==10:
+        elif choice == 7:
+            task_summary(tasks)
+
+        elif choice == 8:
+            priority_choice = input(
+                "Enter priority choice: "
+            ).strip()
+
+            if priority_choice in priority_options:
+                priority = priority_options[priority_choice]
+                filter_tasks(tasks, priority)
+
+            else:
+                print("Please enter a valid priority choice")
+
+        elif choice == 9:
+            category_choice = input(
+                "Enter category choice: "
+            ).strip()
+
+            if category_choice in category_options:
+                category = category_options[category_choice]
+                filter_task_by_category(tasks, category)
+
+            else:
+                print("Please enter a valid category choice")
+
+        elif choice == 10:
             while True:
-                print("\n====== Due Date=====")
-                print("1.Overdue Tasks")
-                print("2.Due Today")
+                print("\n====== Due Date ======")
+                print("1. Overdue Tasks")
+                print("2. Due Today")
                 print("3. Upcoming Tasks")
                 print("4. Back to Main Menu")
-                due_choice=input("Enter your choice").strip()
+
+                due_choice = input(
+                    "Enter your choice: "
+                ).strip()
 
                 if due_choice == "1":
                     show_overdue_tasks(tasks)
+
                 elif due_choice == "2":
                     show_due_tasks(tasks)
+
                 elif due_choice == "3":
                     show_upcoming_due_tasks(tasks)
+
                 elif due_choice == "4":
                     break
+
                 else:
                     print("Invalid choice")
-        elif choice ==11:
+
+        elif choice == 11:
             while True:
-                print("\n ===== Sort Tasks=====")
-                print("1. Sort by priority")
+                print("\n===== Sort Tasks =====")
+                print("1. Sort by Priority")
                 print("2. Sort by Due Date")
-                print("3. Sort by Alphabetical order")
-                print("4. Back to main Menu")
-                sort_choice=input("enter your choice").strip()
+                print("3. Sort by Alphabetical Order")
+                print("4. Back to Main Menu")
+
+                sort_choice = input(
+                    "Enter your choice: "
+                ).strip()
+
                 if sort_choice == "1":
                     sort_tasks_by_priority(tasks)
+
                 elif sort_choice == "2":
                     sort_tasks_by_due_date(tasks)
+
                 elif sort_choice == "3":
                     sort_task_alphabetically(tasks)
+
                 elif sort_choice == "4":
                     break
+
                 else:
-                    print("Invalid choice ")
-            
-
-           
-                            
-                           
-        
-        
-
-            
+                    print("Invalid choice")
 
         elif choice == 12:
+            export_tasks(tasks)
+
+        elif choice == 13:
+            imported_tasks = import_tasks()
+
+            if imported_tasks:
+                tasks = imported_tasks
+                save_tasks(tasks)
+
+        elif choice == 14:
             print("Good Bye")
             break
 
 
 if __name__ == "__main__":
     main()
+
+    
