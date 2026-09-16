@@ -17,7 +17,8 @@ from task_manager import (
     show_upcoming_due_tasks,
     sort_tasks_by_priority,
     sort_tasks_by_due_date,
-    sort_task_alphabetically
+    sort_task_alphabetically,
+    display_tasks_paginated
 
     
 )
@@ -51,7 +52,7 @@ def main():
         #     continue
 
         if choice == 1:
-            display_tasks(tasks)
+            display_tasks_paginated(tasks)
 
         elif choice == 2:
             result = add_task(tasks)

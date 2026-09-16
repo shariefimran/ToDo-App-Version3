@@ -18,24 +18,21 @@ priority_order= {
 
 from datetime import datetime,date
 from menu import print_header
-# def print_header(title):
-#     print("="* 30)
-#     print(title.center(30))
-#     print("="* 30)
-#     print_header("TODO MANAGER")
+from math import ceil
+
 
 def print_separator():
     print("-" * 40)
 
 
-def display_tasks(tasks):
+def display_tasks(tasks,start_number=1):
     """Display all tasks."""
 
     if not tasks:
         print("There are no tasks to display")
     else:
         print_header("TASKS")
-        for index, task in enumerate(tasks, start=1):
+        for index, task in enumerate(tasks, start=start_number):
             priority = task.get("priority","Medium")
             category = task.get("category","Other")
             due_date= task.get("due_date")or "Not Set"
@@ -54,8 +51,38 @@ def display_tasks(tasks):
                 print_separator()         
             
             
-            
-                
+
+
+def display_tasks_paginated(tasks):
+    """ Display tasks page by page"""
+    page_size=5
+    page=1
+    total_pages =ceil(len(tasks)/page_size)
+    while True:
+
+
+        start =(page-1)*page_size
+        end = start+page_size
+
+        page_tasks=tasks[start:end]
+        print(f"page{page} of {total_pages}")
+        display_tasks(page_tasks,start+1)
+
+        print("[N] Next [P] Previous [B] Back")
+        navigation=input("Enter our choice :").strip().lower()
+
+        if navigation == "n" and page< total_pages:
+            page+=1
+        elif navigation == "p" and page > 1:
+            page-=1
+        elif navigation == "b":
+            break
+        else:
+            print("Invalid choice. Please enter N,P, or B")
+    
+    
+
+
         
 
 
