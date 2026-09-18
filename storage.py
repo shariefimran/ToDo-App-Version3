@@ -1,5 +1,7 @@
 import json
 
+from task_manager import generate_task_id
+
 
 def save_tasks(tasks):
     """Save all tasks to a file."""
@@ -24,18 +26,27 @@ def load_tasks():
     with open("tasks.json", "r") as file:
         tasks = json.load(file)
 
-    converted_tasks = []
     migration_needed = False
 
-    for task in tasks:
-
-        # Handle very old tasks stored as strings
+    # Handle very old tasks stored as strings
+    for index, task in enumerate(tasks):
         if isinstance(task, str):
-            task = {
+            tasks[index] = {
                 "name": task,
                 "completed": False
             }
+
             migration_needed = True
+
+    # Generate Task IDs for tasks that don't have one
+    for task in tasks:
+        if "task_id" not in task:
+            migration_needed = True
+            task["task_id"] = generate_task_id(tasks)
+
+    converted_tasks = []
+
+    for task in tasks:
 
         # Check whether V4 fields are missing
         if "priority" not in task:
@@ -72,6 +83,7 @@ def export_tasks(tasks):
     print("Tasks exported successfully.")
     return True
 
+
 def import_tasks():
     """Import tasks from the export file."""
 
@@ -89,7 +101,3 @@ def import_tasks():
 
     print("Tasks imported successfully.")
     return tasks
-
-
-
-    

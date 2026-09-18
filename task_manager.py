@@ -40,13 +40,14 @@ def display_tasks(tasks,start_number=1):
             status = "✔️ Completed" if task['completed'] else "❌ Pending"
             print(f"{index}. {task['name']}")
             print(f" {'Status' :<10} : {status}")
+            print(f"{'Task_ID':<10} : {task['task_id']}")
             
             print(f" {'Priority' :<10} : {priority}") 
             print(f" {'Category' :<10} : {category}")
             print(f" {'Due Date' :<10} : {due_date}")
             print()
 
-            if index < len(tasks):
+            if index < start_number+len(tasks)-1:
 
                 print_separator()         
             
@@ -260,7 +261,22 @@ def filter_task_by_category(tasks, category):
     return True
 
 
+def generate_task_id(tasks):
+    """Generate the next unique task ID."""
 
+    if not tasks:
+        return 1000
+
+    task_ids = [
+        task["task_id"]
+        for task in tasks
+        if "task_id" in task
+    ]
+
+    if task_ids:
+        return max(task_ids) + 1
+
+    return 1000
 
 def add_task(tasks):
     """Add a new task."""
@@ -327,13 +343,16 @@ def add_task(tasks):
         "completed": False,
         "priority":priority,
         "category": category,
-        "due_date": due_date.strftime("%Y-%m-%d")
+        "due_date": due_date.strftime("%Y-%m-%d"),
+        "task_id": generate_task_id(tasks)
     }
 
     tasks.append(new_task)
 
     print(f"{task_to_add} added successfully")
     return True
+
+
 
 def show_overdue_tasks(tasks):
     """Display overdue tasks."""
