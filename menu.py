@@ -19,6 +19,7 @@ menu_items=[
         "Export Tasks",
         "Import Task",
         "Bulk Delete",
+        "Bulk Completed",
         "Exit"
     ]
 def show_menu():

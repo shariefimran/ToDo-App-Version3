@@ -631,3 +631,35 @@ def bulk_delete_tasks(tasks):
 
         print(f"{len(tasks_to_delete)} tasks deleted")
     return True
+
+
+def bulk_complete_tasks(tasks):
+    """ Mark Multiple tasks as completed using task ids"""
+    user_input=input("Enter the task ids to complete (comma seperated):").strip()
+
+    try:
+        task_ids=[
+            int(task_id.strip())
+            for task_id in user_input.split(",")
+        ]
+    except ValueError:
+        print("Invalid task id, please enter numbers seperated by commas")
+        return False
+
+    completed_count=0
+
+    for task in tasks:
+        if task['task_id'] in task_ids:
+            if not task["completed"]:
+                task["completed"]=True
+                completed_count+=1
+
+    if completed_count ==0:
+        print("No pending matching tasks found")
+        return False
+    if completed_count ==1:
+        print("1 task marked as completed")
+    else:
+        print(f"{completed_count} tasks marked as completed")
+
+    return True
