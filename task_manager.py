@@ -2,6 +2,7 @@ from datetime import datetime, date
 from menu import print_header
 from math import ceil
 from logger import log_activity
+from config import TASK_ID_START,PAGE_SIZE,MAX_TASK_NAME_LENGTH
 
 
 priority_options = {
@@ -66,7 +67,7 @@ def display_tasks(tasks, start_number=1):
 def display_tasks_paginated(tasks):
     """Display tasks page by page."""
 
-    page_size = 5
+    page_size = PAGE_SIZE
     page = 1
     total_pages = ceil(len(tasks) / page_size)
 
@@ -297,7 +298,7 @@ def generate_task_id(tasks):
     """Generate the next unique task ID."""
 
     if not tasks:
-        return 1000
+        return TASK_ID_START
 
     task_ids = [
         task["task_id"]
@@ -308,7 +309,7 @@ def generate_task_id(tasks):
     if task_ids:
         return max(task_ids) + 1
 
-    return 1000
+    return TASK_ID_START
 
 
 def add_task(tasks):
@@ -322,7 +323,7 @@ def add_task(tasks):
         print("Task can't be empty")
         return False
 
-    if len(task_to_add) > 100:
+    if len(task_to_add) > MAX_TASK_NAME_LENGTH:
         print("Task name is too long")
         return False
 
