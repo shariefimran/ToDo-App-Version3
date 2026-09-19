@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+
+activity.log
+tasks_export.json
+
+.DS_Store
