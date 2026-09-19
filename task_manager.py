@@ -598,3 +598,36 @@ def search_task(tasks):
         return False
 
     return True
+
+
+def bulk_delete_tasks(tasks):
+    """ Delete Multiple tasks using task Ids"""
+
+    user_input =input("enter the task ids to delet (comma seperate) :").strip()
+
+    try :
+
+        task_ids=[
+            int(task_id.strip())
+            for task_id in user_input.split(",")
+
+        ]
+    except ValueError:
+        print("Invalid task id please enter numbers seperated by commas")
+        return False
+    tasks_to_delete=[
+        task
+        for task in tasks
+        if task['task_id'] in task_ids
+    ]
+    if not tasks_to_delete:
+        print("No matching tasks found")
+        return False
+    for task in tasks_to_delete:
+        tasks.remove(task)
+    if len(tasks_to_delete)==1:
+        print("1 task deleted.")
+    else:
+
+        print(f"{len(tasks_to_delete)} tasks deleted")
+    return True

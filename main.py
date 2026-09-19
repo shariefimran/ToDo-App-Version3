@@ -18,7 +18,8 @@ from task_manager import (
     sort_tasks_by_priority,
     sort_tasks_by_due_date,
     sort_task_alphabetically,
-    display_tasks_paginated
+    display_tasks_paginated,
+    bulk_delete_tasks
 )
 
 from storage import (
@@ -166,8 +167,11 @@ def main():
             if imported_tasks:
                 tasks = imported_tasks
                 save_tasks(tasks)
-
         elif choice == 14:
+            if bulk_delete_tasks(tasks):
+                save_tasks(tasks)
+
+        elif choice == 15:
             print("Good Bye")
             break
 

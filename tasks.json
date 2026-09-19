@@ -1,29 +1,5 @@
 [
     {
-        "name": "practice python",
-        "completed": false,
-        "priority": "Medium",
-        "category": "Other",
-        "due_date": null,
-        "task_id": 1000
-    },
-    {
-        "name": "validation",
-        "completed": false,
-        "priority": "Medium",
-        "category": "Other",
-        "due_date": null,
-        "task_id": 1001
-    },
-    {
-        "name": "abcdef",
-        "completed": false,
-        "priority": "Medium",
-        "category": "Other",
-        "due_date": null,
-        "task_id": 1002
-    },
-    {
         "name": "validating all the options",
         "completed": true,
         "priority": "Medium",
